@@ -73,6 +73,9 @@ export default class Api extends Record({
   get url() {
     switch (this.type) {
       case Street.types.TAG: {
+        if(`${this.context.tagId}` == `all`) {
+          return `https://qiita.com/api/v2/items`;
+        }
         return `${this.endpoint}/${this.context.tagId}/items?${this.query}`;
       }
       case Street.types.SEARCH:
