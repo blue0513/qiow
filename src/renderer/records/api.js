@@ -57,6 +57,10 @@ export default class Api extends Record({
     );
     switch (this.type) {
       case Street.types.TAG: {
+        if(`${this.context.tagId}` == `all`) {
+          const _endpoint = `https://qiita.com/api/v2/items`;
+          return `${_endpoint}?${query}`;
+        }
         return `${this.endpoint}/${this.context.tagId}/items?${query}`;
       }
       case Street.types.SEARCH:
@@ -74,7 +78,8 @@ export default class Api extends Record({
     switch (this.type) {
       case Street.types.TAG: {
         if(`${this.context.tagId}` == `all`) {
-          return `https://qiita.com/api/v2/items`;
+          const _endpoint = `https://qiita.com/api/v2/items`;
+          return `${_endpoint}?${this.query}`;
         }
         return `${this.endpoint}/${this.context.tagId}/items?${this.query}`;
       }
