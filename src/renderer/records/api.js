@@ -56,13 +56,16 @@ export default class Api extends Record({
       {...queryString.parse(this.query), ...{page: 1}}
     );
     switch (this.type) {
-      case Street.types.TAG: {
-        if(`${this.context.tagId}` == `all`) {
-          const _endpoint = `https://qiita.com/api/v2/items`;
-          return `${_endpoint}?${query}`;
+      case Street.types.TAG: 
+        
+        if(this.context.tagId === "all") {
+          const endpoint2 = `https:qiita.com/api/v2/items`;
+          return `${endpoint2}?${query}`;
+        }else{          
+          return `${this.endpoint}/${this.context.tagId}/items?${query}`;
         }
-        return `${this.endpoint}/${this.context.tagId}/items?${query}`;
-      }
+        
+        break;
       case Street.types.SEARCH:
       case Street.types.STOCK: {
         return `${this.endpoint}?${query}`;
@@ -76,13 +79,16 @@ export default class Api extends Record({
 
   get url() {
     switch (this.type) {
-      case Street.types.TAG: {
-        if(`${this.context.tagId}` == `all`) {
-          const _endpoint = `https://qiita.com/api/v2/items`;
-          return `${_endpoint}?${this.query}`;
+      case Street.types.TAG:
+        
+        if(this.context.tagId === "all") {
+          const endpoint2 = 'https:qiita.com/api/v2/items';
+          return `${endpoint2}?${this.query}`;
+        }else {
+          return `${this.endpoint}/${this.context.tagId}/items?${this.query}`;
         }
-        return `${this.endpoint}/${this.context.tagId}/items?${this.query}`;
-      }
+        
+        break;
       case Street.types.SEARCH:
       case Street.types.STOCK: {
         return `${this.endpoint}?${this.query}`;
